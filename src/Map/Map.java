@@ -11,9 +11,15 @@ public class Map<K, V> {
     }
 
     public V put(K key, V value) {
-        keys.add(key);
-        values.add(keys.indexOf(key), value);
-        return value;
+        V result = null;
+        if (containsKey(key)) {
+            result = values.get(keys.indexOf(key));
+            values.add(keys.indexOf(key), value);
+        } else {
+            keys.add(key);
+            values.add(keys.indexOf(key), value);
+        }
+        return result;
     }
     public V get(K key){
         if (keys.isEmpty() | !keys.contains(key)) return null;
