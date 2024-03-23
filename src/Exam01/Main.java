@@ -7,36 +7,26 @@ import java.util.*;
 
 public class Main {
     public static void main(String args[]) throws FileNotFoundException {
-        try (Scanner reader = new Scanner(new File("schedule.txt"))) {
+        Scanner reader = new Scanner(new File("schedule.txt"));
+        try {
             List<String> channels = new LinkedList<>();
             List<Program> programs = new LinkedList<>();
             String channelLine = "";
             String timeLine = "";
             String titleLine = "";
-            int k = 0;
             while (reader.hasNext()) {
-                switch (k) {
-                    case 0: {
-                        channelLine = reader.next();
-                        channels.add(channelLine);
-                        break;
-                    }
-                    case 1: {
-                        timeLine = reader.next();
-                        break;
-                    }
-                    case 2: {
-                        titleLine = reader.next();
-                        programs.add(new Program(channelLine, timeLine, titleLine));
-                        k = 0;
-                        break;
-                    }
-                }
-                k++;
+                String line = reader.next();
+                if (line.charAt(0) == '#') channels.add(channelLine);
+                if ((int)line.charAt(0) < 10) timeLine = line;
+                titleLine = line;
+                programs.add(new Program(channelLine, timeLine, titleLine));
             }
+            List<String> list = Files.readAllLines(new File("schedule.txt").toPath(), Charset.defaultCharset());
             System.out.println(programs.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            reader.close();
         }
     }
 }
