@@ -27,7 +27,7 @@ public class MyReader extends Thread{
             DataOutputStream writer = new DataOutputStream(new FileOutputStream(
                 "C:\\Users\\kulsi\\IdeaProjects\\inf304\\src\\Exam02\\v13.log"));
             DataOutputStream merger = new DataOutputStream(new FileOutputStream(
-                    "C:\\Users\\kulsi\\IdeaProjects\\inf304\\src\\Exam02\\v13\\v13.txt"))) {
+                    "C:\\Users\\kulsi\\IdeaProjects\\inf304\\src\\Exam02\\v13.txt"))) {
             k = reader.readInt();
             byte[] buffer = new byte[k];
             reader.read(buffer);
